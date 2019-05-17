@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  security:
+    user:
+      name: admin
+      password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default-schema: CHALLENGE
+        dialect: org.hibernate.dialect.H2Dialect
+logging:
+  level: debug
