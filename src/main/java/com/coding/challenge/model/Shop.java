@@ -1,9 +1,6 @@
 package com.coding.challenge.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Shop {
@@ -16,6 +13,11 @@ public class Shop {
     private String image;
     private double latitude;
     private double longitude;
+
+    @ManyToOne
+    @JoinColumn
+    private PreferredShop preferredShop;
+
 
     public Shop(String name, String image, Double latitude, Double longitude) {
         this.name = name;
@@ -40,19 +42,27 @@ public class Shop {
         this.image = image;
     }
 
-    public Double getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public PreferredShop getPreferredShop() {
+        return preferredShop;
+    }
+
+    public void setPreferredShop(PreferredShop preferredShop) {
+        this.preferredShop = preferredShop;
     }
 }
