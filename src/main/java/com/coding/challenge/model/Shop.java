@@ -14,8 +14,8 @@ public class Shop {
 
     private String name;
     private String image;
-    private Double latitude;
-    private Double longitude;
+    private double latitude;
+    private double longitude;
 
     public Shop(String name, String image, Double latitude, Double longitude) {
         this.name = name;
