@@ -15,6 +15,10 @@ public class SignupRequestDto {
     @Size(min = 6, max = 20)
     private String password;
 
+    public SignupRequestDto(@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(min = 6, max = 20) String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;

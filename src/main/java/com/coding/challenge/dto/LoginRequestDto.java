@@ -10,6 +10,11 @@ public class LoginRequestDto {
     @NotBlank
     private String password;
 
+    public LoginRequestDto(@NotBlank String email, @NotBlank String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public String getEmail() {
         return email;
     }
