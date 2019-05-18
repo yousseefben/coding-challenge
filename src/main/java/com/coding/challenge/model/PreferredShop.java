@@ -28,6 +28,13 @@ public class PreferredShop {
     @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Date getUpdatedAt() {
         return updatedAt;

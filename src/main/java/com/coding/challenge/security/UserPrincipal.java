@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class UserPrincipal implements UserDetails {
+
     private Long id;
 
     private String email;
@@ -16,7 +17,8 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private String password;
 
-    public UserPrincipal(String email, String password) {
+    public UserPrincipal(Long id, String email, String password) {
+        this.id = id;
         this.email = email;
         this.password = password;
     }
@@ -24,10 +26,16 @@ public class UserPrincipal implements UserDetails {
     public static UserPrincipal create(User user) {
 
         return new UserPrincipal(
+                user.getId(),
                 user.getEmail(),
                 user.getPassword()
         );
     }
+
+    public Long getId() {
+        return id;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
