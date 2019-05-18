@@ -1,18 +1,10 @@
-package com.coding.challenge.model;
+package com.coding.challenge.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SignupRequestDto {
 
     @NotBlank
     @Size(max = 40)
@@ -20,15 +12,12 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(min = 6, max = 20)
     private String password;
 
-    public User(@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password) {
+    public SignupRequestDto(@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(min = 6, max = 20) String password) {
         this.email = email;
         this.password = password;
-    }
-
-    public User() {
     }
 
     public String getEmail() {
