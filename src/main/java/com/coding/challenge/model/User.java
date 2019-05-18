@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -20,8 +21,8 @@ public class User {
     @Size(max = 100)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private PreferredShop preferredShop;
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    private Set<PreferredShop> preferredShops;
 
 
     public User(@NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password) {
@@ -48,11 +49,11 @@ public class User {
         this.password = password;
     }
 
-    public PreferredShop getPreferredShop() {
-        return preferredShop;
+    public Set<PreferredShop> getPreferredShops() {
+        return preferredShops;
     }
 
-    public void setPreferredShop(PreferredShop preferredShop) {
-        this.preferredShop = preferredShop;
+    public void setPreferredShops(Set<PreferredShop> preferredShops) {
+        this.preferredShops = preferredShops;
     }
 }

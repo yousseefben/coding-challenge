@@ -1,10 +1,9 @@
 package com.coding.challenge.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class PreferredShop {
@@ -13,15 +12,22 @@ public class PreferredShop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @DateTimeFormat
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at", nullable = false)
+    @UpdateTimestamp
     private Date updatedAt;
 
-    @OneToOne(mappedBy = "preferredShop")
-    @JoinColumn
+    @Column(name = "liked", nullable = false)
+    private boolean like;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "preferredShop", cascade = CascadeType.ALL)
-    private Set<Shop> shops;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id", nullable = false)
+    private Shop shop;
+
 
     public Date getUpdatedAt() {
         return updatedAt;
@@ -39,11 +45,19 @@ public class PreferredShop {
         this.user = user;
     }
 
-    public Set<Shop> getShops() {
-        return shops;
+    public Shop getShop() {
+        return shop;
     }
 
-    public void setShops(Set<Shop> shops) {
-        this.shops = shops;
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public boolean isLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
     }
 }

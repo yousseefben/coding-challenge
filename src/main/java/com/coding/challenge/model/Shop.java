@@ -1,6 +1,7 @@
 package com.coding.challenge.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Shop {
@@ -14,10 +15,12 @@ public class Shop {
     private double latitude;
     private double longitude;
 
-    @ManyToOne
-    @JoinColumn
-    private PreferredShop preferredShop;
 
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    private Set<PreferredShop> preferredShops;
+
+    public Shop() {
+    }
 
     public Shop(String name, String image, Double latitude, Double longitude) {
         this.name = name;
@@ -58,11 +61,22 @@ public class Shop {
         this.longitude = longitude;
     }
 
-    public PreferredShop getPreferredShop() {
-        return preferredShop;
+    public Set<PreferredShop> getPreferredShops() {
+        return preferredShops;
     }
 
-    public void setPreferredShop(PreferredShop preferredShop) {
-        this.preferredShop = preferredShop;
+    public void setPreferredShops(Set<PreferredShop> preferredShops) {
+        this.preferredShops = preferredShops;
+    }
+
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

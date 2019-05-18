@@ -1,6 +1,6 @@
 package com.coding.challenge.controller;
 
-import com.coding.challenge.dto.LoginRequestDto;
+import com.coding.challenge.dto.SignupRequestDto;
 import com.coding.challenge.repository.UserRepository;
 import com.coding.challenge.utils.IntegrationTestUtil;
 import org.junit.Before;
@@ -41,20 +41,20 @@ public class AuthControllerTest {
 
 
     @Test
-    public void authenticateUserTest_ok() throws Exception {
+    public void signupUserTest_ok() throws Exception {
 
-        LoginRequestDto user = new LoginRequestDto("test@gmail.com", "password");
+        SignupRequestDto user = new SignupRequestDto("test@gmail.com", "password");
 
-        mvc.perform(post("/api/auth/signin").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(post("/api/auth/signup").contentType(MediaType.APPLICATION_JSON)
                 .content(IntegrationTestUtil.convertObjectToJson(user)))
                 .andExpect(status().isOk());
 
     }
 
     @Test
-    public void authenticateUserTest_badRequest() throws Exception {
+    public void signupUserTest_badRequest() throws Exception {
 
-        mvc.perform(post("/api/auth/signin").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(post("/api/auth/signup").contentType(MediaType.APPLICATION_JSON)
                 .content("{tt: tt}"))
                 .andExpect(status().isBadRequest());
 
